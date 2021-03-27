@@ -18,13 +18,17 @@ import { MatCardModule} from '@angular/material/card'
 import { MatInputModule} from '@angular/material/input'
 import { MatFormFieldModule} from '@angular/material/form-field'
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MainNavComponent } from './shared/main-nav/main-nav.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatListModule} from '@angular/material/list'
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     BaseLayoutComponent,
     AuthLayoutComponent,
-    LoginComponent
+    LoginComponent,
+    MainNavComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +44,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatCardModule,
     MatInputModule,
     MatFormFieldModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSidenavModule,
+    MatListModule
     
   ],
   providers: [],
