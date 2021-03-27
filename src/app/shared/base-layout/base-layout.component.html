@@ -1,7 +1,7 @@
 <div fxLayout="column">
 
     <!-- navigation -->
- <app-main-nav></app-main-nav>
+ <app-main-nav #main></app-main-nav>
     <!-- main content -->
     <div fxFlex>
       <main class="main-content" fxFlex="100%;">
@@ -12,7 +12,7 @@
     <!-- footer -->
     <div fxFlex>
       <footer class="footer">
-        <mat-toolbar class="footer-content">
+        <mat-toolbar class="footer-content " color="primary" >
           <p>
             &copy; {{year | date: 'yyyy'}} - nodebucket - <a href="https://www.bellevue.edu/" class="bu-link" target="_blank">Bellevue University</a>
           </p>

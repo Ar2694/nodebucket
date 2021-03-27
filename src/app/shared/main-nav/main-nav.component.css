@@ -1,14 +1,18 @@
+
 .sidenav-container {
   height: 100%;
+  -webkit-box-shadow:-1px -8px 50px -8px rgb(0 0 0 / 47%);
+    box-shadow: -1px -8px 50px -8px rgb(0 0 0 / 47%);
 }
 
 .sidenav {
   width: 200px;
-  -webkit-box-shadow: -1px 0px 50px -5px rgba(0,0,0,0.3); 
-  box-shadow: -1px 0px 50px -5px rgba(0,0,0,0.3);
+  -webkit-box-shadow: 0px 80px 35px -8px rgb(0 0 0 / 47%);
+  box-shadow: 0px 80px 35px -8px rgb(0 0 0 / 47%);
   background-color: #006064;
 
 }
+
 .sidenav .mat-list-item{
   color: #FFFFFF;
   border-bottom: 1px solid #FFFFFF;
@@ -17,6 +21,7 @@
 .sidenav .mat-toolbar {
   background: inherit;
   color: #FFFFFF;
+
 }
 
 .mat-toolbar.mat-primary {
@@ -24,3 +29,7 @@
   top: 0;
   z-index: 1;
 }
+.mat-drawer-side {
+  border: none;
+}
+

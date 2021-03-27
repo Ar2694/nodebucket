@@ -8,10 +8,12 @@ import { Component, OnInit } from '@angular/core';
 export class BaseLayoutComponent implements OnInit {
 
   year: number = Date.now();
+  mobile = false;
   
   constructor() { }
 
   ngOnInit(): void {
+ 
   }
 
 }
