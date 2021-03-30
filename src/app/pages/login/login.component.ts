@@ -1,3 +1,12 @@
+/*
+============================================
+; Title: login.component.ts
+; Author: Professor Krasso
+; Date: 29 March 2021
+; Modified By: Arlix Sorto
+; Description: Week 4
+;===========================================
+*/
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup,Validators } from '@angular/forms';

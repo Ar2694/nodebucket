@@ -1,3 +1,12 @@
+/*
+============================================
+; Title: main-nav.component.ts
+; Author: Professor Krasso
+; Date: 29 March 2021
+; Modified By: Arlix Sorto
+; Description: Week 4
+;===========================================
+*/ 
 import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints, BreakpointState  } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';

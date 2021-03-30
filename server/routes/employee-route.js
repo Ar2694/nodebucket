@@ -1,3 +1,12 @@
+/*
+============================================
+; Title: employee-route.js
+; Author: Professor Krasso
+; Date: 29 March 2021
+; Modified By: Arlix Sorto
+; Description: Week 4
+;===========================================
+*/ 
 const express = require("express");
 const Employee = require("../db-models/employee");
 const BaseResponse = require("../service/base-response");
@@ -226,9 +235,9 @@ router.delete("/:empId/tasks/:taskId", async (req, res) => {
                             } else {
                                 console.log(updatedDoneItemEmployee);
     
-                                const deleteDOneItemSuccess = new BaseResponse("200","Query Successful", updatedDoneItemEmployee);
+                                const deleteDoneItemSuccess = new BaseResponse("200","Query Successful", updatedDoneItemEmployee);
     
-                                res.status(200).send(updatedDoneItemEmployee);
+                                res.status(200).send(deleteDoneItemSuccess);
                             }
                         });
                     } else {

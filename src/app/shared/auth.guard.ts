@@ -1,3 +1,12 @@
+/*
+============================================
+; Title: auth.guard.ts
+; Author: Professor Krasso
+; Date: 29 March 2021
+; Modified By: Arlix Sorto
+; Description: Week 4
+;===========================================
+*/ 
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';

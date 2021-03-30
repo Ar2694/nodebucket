@@ -1,3 +1,12 @@
+/*
+============================================
+; Title: employee.js
+; Author: Professor Krasso
+; Date: 29 March 2021
+; Modified By: Arlix Sorto
+; Description: Week 4
+;===========================================
+*/ 
 const mongoose = require('mongoose');
 const Item = require('./item');
 
