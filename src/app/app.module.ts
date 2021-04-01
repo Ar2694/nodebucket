@@ -29,7 +29,13 @@ import { MatFormFieldModule} from '@angular/material/form-field'
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MainNavComponent } from './shared/main-nav/main-nav.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatListModule} from '@angular/material/list'
+import {MatListModule} from '@angular/material/list';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatMenuModule } from '@angular/material/menu'
+import { MatDialogModule } from '@angular/material/dialog';
+import { CreateTaskDialogComponent } from './shared/create-task-dialog/create-task-dialog.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +43,8 @@ import {MatListModule} from '@angular/material/list'
     BaseLayoutComponent,
     AuthLayoutComponent,
     LoginComponent,
-    MainNavComponent
+    MainNavComponent,
+    CreateTaskDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +62,10 @@ import {MatListModule} from '@angular/material/list'
     MatFormFieldModule,
     MatSnackBarModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    DragDropModule,
+    MatMenuModule,
+    MatDialogModule
     
   ],
   providers: [],

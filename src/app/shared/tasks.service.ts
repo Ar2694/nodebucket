@@ -28,7 +28,7 @@ export class TasksService {
     * @returns 
     */
    findAllTasks(empId: string): Observable<any> {
-    return this.http.get('/api/employees/ ' + empId + '/tasks')
+    return this.http.get('/api/employees/' + empId + '/tasks')
   }
 
   /**
@@ -38,7 +38,7 @@ export class TasksService {
    * @returns 
    */
   createTask(empId: string, task: string): Observable<any>{
-    return this.http.post('/api/employees/ ' + empId + '/tasks', {
+    return this.http.post('/api/employees/' + empId + '/tasks', {
       text: task
     });
 
@@ -52,7 +52,7 @@ export class TasksService {
    * @returns 
    */
   updateTask(empId: string, todo: Item[], done: Item[]): Observable<any>{
-    return this.http.post('/api/employees/ ' + empId + '/tasks', {
+    return this.http.put(`/api/employees/${empId}/tasks`, {
       todo,
       done
     });
@@ -66,6 +66,6 @@ export class TasksService {
    * @returns 
    */
   deleteTask(empId: string, taskId: string): Observable<any>{
-    return this.http.delete(`/api/employees/ ' + ${empId} + '/tasks/' + ${taskId}`);
+    return this.http.delete(`/api/employees/${empId}/tasks/${taskId}`);
   }
 }

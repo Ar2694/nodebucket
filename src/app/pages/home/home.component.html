@@ -10,11 +10,118 @@
 */
 -->
 <div fxLayout="column" class="main-welcome">
+
+  <!--Title-->
+  <div fxFlex>
     <h1 class="title">
       Welcome to WEB 450's - nodebucket Project <br />
       <span class="subtitle">
-        Pay close attention to the requirements, double and triple check the files for code attribution, and do not wait unitl the last minute to begin working on each item.
+        Pay close attention to the requirements, double and triple check the files for code attribution, and do not wait
+        unitl the last minute to begin working on each item.
       </span>
     </h1>
   </div>
-  
+  <!-- Create task-->
+  <div fxFlex>
+
+    <div fxLayout="column" class="task-container">
+      <button mat-raised-button color="primary" (click)="openCreateTaskDialog()"> Create Task</button>
+    </div>
+
+  </div>
+<br />
+  <!--Task Columns-->
+  <div fxFlex>
+
+    <div fxLayout="row" fxLayoutGap="15px" class="task-container">
+
+      <!--Todo-->
+      <div fxFlex>
+        <mat-card>
+          <mat-card-title>To do</mat-card-title>
+          <mat-card-content>
+            <div fxLayout="column" fxLayoutGap="10px" class="task-list" cdkDropList #todoList="cdkDropList"
+              [cdkDropListData]="todo" [cdkDropListConnectedTo]="[doneList]" (cdkDropListDropped)="drop($event)">
+
+
+              <div *ngFor="let item of todo" cdkDrag>
+                <mat-card class="mat-elevation-z0 task-card">
+                  <mat-card-content>
+                    <div fxLayout="row">
+                      <div fxFlex>
+                        {{item.text}}
+                      </div>
+
+                      <div fxFlex fxLayoutAlign="end">
+                        <button [matMenuTriggerFor]="todoOptions" class="" mat-icon-button>
+                          <mat-icon>more_horiz</mat-icon>
+                        </button>
+
+                        <mat-menu #todoOptions="matMenu" x-position="before">
+                          <button (click)="deleteTask(item._id)" mat-menu-item>Remove</button>
+                        </mat-menu>
+                      </div>
+                    </div>
+                  </mat-card-content>
+                </mat-card>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <!-- end of tdo fxFlex -->
+
+
+      <!--Done-->
+      <div fxFlex>
+        <mat-card>
+          <mat-card-title>Done</mat-card-title>
+          <mat-card-content>
+            <div fxLayout="column" fxLayoutGap="10px" class="task-list" cdkDropList #doneList="cdkDropList"
+              [cdkDropListData]="done" [cdkDropListConnectedTo]="todoList" (cdkDropListDropped)="drop($event)">
+
+              <div *ngFor="let item of done" cdkDrag>
+                <mat-card class="mat-elevation-z0 task-card">
+                  <mat-card-content>
+                    <div fxLayout="row">
+                      <div fxFlex>
+                        {{item.text}}
+                      </div>
+                      <!--end done item-->
+                      <div fxFlex fxLayoutAlign="end">
+                        <button [matMenuTriggerFor]="todoOptions" class="" mat-icon-button>
+                          <mat-icon>more_horiz</mat-icon>
+                        </button>
+
+                        <mat-menu #todoOptions="matMenu" x-position="before">
+                          <button (click)="deleteTask(item._id)" mat-menu-item>Remove</button>
+                        </mat-menu>
+                        <!--end mat menu-->
+                      </div>
+                      <!--end done option menu-->
+                    </div>
+                    <!--end fxLayout row-->
+                  </mat-card-content>
+
+                  <!--end mat card content-->
+                </mat-card>
+                <!--end mat card-->
+              </div>
+              <!-- End of ngFor for done item-->
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <!-- end of done fxFlex -->
+
+    </div>
+
+
+    <!-- end of row container -->
+  </div>
+  <!--end of fxFlex-->
+
+
+
+</div>
+<!-- end of the main container-->

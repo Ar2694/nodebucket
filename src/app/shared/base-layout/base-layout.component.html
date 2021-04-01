@@ -15,15 +15,15 @@
  <app-main-nav #main></app-main-nav>
     <!-- main content -->
     <div fxFlex>
-      <main class="main-content" fxFlex="100%;">
+      <main class="main-content" [ngClass]="{'active' : !main.showSidNav}" fxFlex="100%;">
         <router-outlet></router-outlet>
       </main>
     </div>
   
     <!-- footer -->
     <div fxFlex>
-      <footer class="footer">
-        <mat-toolbar class="footer-content " color="primary" >
+      <footer class="footer ">
+        <mat-toolbar class="footer-content " [ngClass]="{'active' : !main.showSidNav}" color="primary" >
           <p>
             &copy; {{year | date: 'yyyy'}} - nodebucket - <a href="https://www.bellevue.edu/" class="bu-link" target="_blank">Bellevue University</a>
           </p>

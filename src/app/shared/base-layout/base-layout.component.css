@@ -27,14 +27,17 @@
     bottom: 0;
     position: fixed;
     width: 100%;
-    
+    z-index: 1;
   }
   
   .footer-content {
     font-size: 16px;
     font-weight: lighter;
-  
     letter-spacing: 3px;
+    padding-left: 0;
+    transition-duration: 400ms;
+
+    transition-property: padding-left,padding-right;
 
   }
     
@@ -52,3 +55,15 @@
   .bu-link:hover {
     text-decoration: underline;
   }
+.active{
+  padding-left: 200px!important;
+  transition-duration: 400ms;
+
+  transition-property: padding-left,padding-right;
+}
+.main-content{
+  padding-left: 0;
+  transition-duration: 400ms;
+ 
+  transition-property: padding-left,padding-right;
+}
