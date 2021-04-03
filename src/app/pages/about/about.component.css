@@ -1,0 +1,17 @@
+.author-image{
+    text-align: center;
+}
+.figure-img{
+    width: 360px;   
+}
+cite,
+.figure-caption{
+ font-style: italic;
+}
+p{
+    text-indent: 2em;
+    font-size: 18px;
+}
+.about-container{
+    padding: 100px 40px;
+}

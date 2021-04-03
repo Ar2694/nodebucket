@@ -24,7 +24,7 @@
   <!-- Create task-->
   <div fxFlex>
 
-    <div fxLayout="column" class="task-container">
+    <div fxLayout="column" class="task-container createTask-container">
       <button mat-raised-button color="primary" (click)="openCreateTaskDialog()"> Create Task</button>
     </div>
 
@@ -41,7 +41,7 @@
           <mat-card-title>To do</mat-card-title>
           <mat-card-content>
             <div fxLayout="column" fxLayoutGap="10px" class="task-list" cdkDropList #todoList="cdkDropList"
-              [cdkDropListData]="todo" [cdkDropListConnectedTo]="[doneList]" (cdkDropListDropped)="drop($event)">
+              [cdkDropListData]="todo" [cdkDropListConnectedTo]="[doneList,inProgressList]" (cdkDropListDropped)="drop($event)">
 
 
               <div *ngFor="let item of todo" cdkDrag>
@@ -59,7 +59,10 @@
 
                         <mat-menu #todoOptions="matMenu" x-position="before">
                           <button (click)="deleteTask(item._id)" mat-menu-item>Remove</button>
+                          <!---FIX ME-->
+                          <button (click)="openEditTaskDialog(item._id)" mat-menu-item>Edit</button>
                         </mat-menu>
+                    
                       </div>
                     </div>
                   </mat-card-content>
@@ -71,6 +74,47 @@
       </div>
       <!-- end of tdo fxFlex -->
 
+<!--In Progress-->
+<div fxFlex>
+  <mat-card>
+    <mat-card-title>In Progress</mat-card-title>
+    <mat-card-content>
+      <div fxLayout="column" fxLayoutGap="10px" class="task-list" cdkDropList #inProgressList="cdkDropList"
+        [cdkDropListData]="inProgress" [cdkDropListConnectedTo]="[todoList,doneList]" (cdkDropListDropped)="drop($event)">
+
+        <div *ngFor="let item of inProgress" cdkDrag>
+          <mat-card class="mat-elevation-z0 task-card">
+            <mat-card-content>
+              <div fxLayout="row">
+                <div fxFlex>
+                  {{item.text}}
+                </div>
+                <!--end done item-->
+                <div fxFlex fxLayoutAlign="end">
+                  <button [matMenuTriggerFor]="todoOptions" class="" mat-icon-button>
+                    <mat-icon>more_horiz</mat-icon>
+                  </button>
+
+                  <mat-menu #todoOptions="matMenu" x-position="before">
+                    <button (click)="deleteTask(item._id)" mat-menu-item>Remove</button>
+                    <button (click)="openEditTaskDialog(item._id)" mat-menu-item>Edit</button>
+                  </mat-menu>
+                  <!--end mat menu-->
+                </div>
+                <!--end done option menu-->
+              </div>
+              <!--end fxLayout row-->
+            </mat-card-content>
+
+            <!--end mat card content-->
+          </mat-card>
+          <!--end mat card-->
+        </div>
+        <!-- End of ngFor for done item-->
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
 
       <!--Done-->
       <div fxFlex>
@@ -78,7 +122,7 @@
           <mat-card-title>Done</mat-card-title>
           <mat-card-content>
             <div fxLayout="column" fxLayoutGap="10px" class="task-list" cdkDropList #doneList="cdkDropList"
-              [cdkDropListData]="done" [cdkDropListConnectedTo]="todoList" (cdkDropListDropped)="drop($event)">
+              [cdkDropListData]="done" [cdkDropListConnectedTo]="[todoList,inProgressList]" (cdkDropListDropped)="drop($event)">
 
               <div *ngFor="let item of done" cdkDrag>
                 <mat-card class="mat-elevation-z0 task-card">
@@ -93,8 +137,10 @@
                           <mat-icon>more_horiz</mat-icon>
                         </button>
 
+                        
                         <mat-menu #todoOptions="matMenu" x-position="before">
                           <button (click)="deleteTask(item._id)" mat-menu-item>Remove</button>
+                          <button (click)="openEditTaskDialog(item._id)" mat-menu-item>Edit</button>
                         </mat-menu>
                         <!--end mat menu-->
                       </div>

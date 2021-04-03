@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>Edit Current Task</h2>
+
+<mat-dialog-content [formGroup]="taskForm">
+    <mat-form-field>
+        <input type="text" matInput placeholder="Edit task name" formControlName="text" />
+    </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button (click)="cancel()">Cancel</button>
+    <button mat-button (click)="EditTask()" [disabled]="!taskForm.valid">Edit Task</button>
+</mat-dialog-actions>

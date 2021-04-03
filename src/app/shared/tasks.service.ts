@@ -30,7 +30,15 @@ export class TasksService {
    findAllTasks(empId: string): Observable<any> {
     return this.http.get('/api/employees/' + empId + '/tasks')
   }
-
+ /**
+   * 
+   * @param empId 
+   * @param taskId 
+   * @returns 
+   */
+  findATask(empId: string, taskId: string): Observable<any>{
+    return this.http.get(`/api/employees/${empId}/tasks/${taskId}`);
+  }
   /**
    * 
    * @param empId 
@@ -48,12 +56,14 @@ export class TasksService {
    * 
    * @param empId 
    * @param todo 
+   * @param inProgress 
    * @param done 
    * @returns 
    */
-  updateTask(empId: string, todo: Item[], done: Item[]): Observable<any>{
+  updateTask(empId: string, todo: Item[],inProgress: Item[], done: Item[]): Observable<any>{
     return this.http.put(`/api/employees/${empId}/tasks`, {
       todo,
+      inProgress,
       done
     });
   }

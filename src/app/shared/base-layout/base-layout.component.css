@@ -59,11 +59,12 @@
   padding-left: 200px!important;
   transition-duration: 400ms;
 
-  transition-property: padding-left,padding-right;
+  transition-property: padding-left, padding-right;
 }
 .main-content{
   padding-left: 0;
   transition-duration: 400ms;
- 
-  transition-property: padding-left,padding-right;
+ margin: 25px auto;
+
+  transition-property: padding-left, padding-right;
 }

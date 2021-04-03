@@ -1,0 +1,17 @@
+.material-icons{
+    font-size: 50px;
+  color: #5e5e5e;
+}
+h1{
+    font-size: 45px;
+    font-weight: 600;
+}
+.mat-card{
+    background: url('/assets/not-found.png') center no-repeat!important;
+    background-size: 100%!important;
+    padding: 280px;
+box-shadow: none!important;
+}
+button{
+    font-size: 18px;
+}

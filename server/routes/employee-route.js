@@ -43,7 +43,7 @@ router.get("/:empId", async (req, res) => {
  */
 router.get("/:empId/tasks", async (req, res) => {
     try {
-        Employee.findOne({ empId: req.params.empId }, "empId todo done", function (err, employee) {
+        Employee.findOne({ empId: req.params.empId }, "empId todo inProgress done", function (err, employee) {
             if (err) {
                 console.log(err);
 
@@ -62,6 +62,87 @@ router.get("/:empId/tasks", async (req, res) => {
         const errorCatchResponse = new BaseResponse("500",`Internal server error ${e.message}`,null);
 
         res.status(500).send(errorCatchResponse.toObject());
+    }
+});
+/**
+ * API: findATask
+ */
+ router.get("/:empId/tasks/:taskId", async (req, res) => {
+    try {
+        Employee.findOne({ empId: req.params.empId }, function (err, employee) {
+            if (err) {
+                console.log(err);
+                const getTaskMongoDbError = new BaseResponse("500", `Internal server error ${err.message}`,null );
+
+                res.status(500).send(getTaskMongoDbError.toObject());
+            } else {
+
+                if (employee) {
+                    console.log(employee);
+
+                    const todoItem = employee.todo.find(
+                        (item) => item._id.toString() === req.params.taskId
+                    );
+                    const inProgressItem = employee.inProgress.find(
+                        (item) => item._id.toString() === req.params.taskId
+                    );
+                    const doneItem = employee.done.find(
+                        (item) => item._id.toString() === req.params.taskId
+                    );
+    
+                    if (todoItem) {
+                        console.log("found a todoItem");
+                        console.log(todoItem);
+    
+
+                                const getTodoItemSuccess = new BaseResponse("200", "Query successful", todoItem);
+    
+                                res.status(200).send(getTodoItemSuccess.toObject());
+                   
+                    }else if (inProgressItem) {
+                        console.log("found a inProgressItem");
+                        console.log(inProgressItem);
+    
+                     
+    
+                                const getInProgressItemSuccess = new BaseResponse("200","Query Successful", inProgressItem);
+    
+                                res.status(200).send(getInProgressItemSuccess);
+                    
+                    }
+                     else if (doneItem) {
+                        console.log("found a doneItem");
+                        console.log(doneItem);
+    
+                   
+            
+    
+                                const getDoneItemSuccess = new BaseResponse("200","Query Successful", doneItem);
+    
+                                res.status(200).send(getDoneItemSuccess);
+                       
+                        
+                    } else {
+                      
+                        const invalidTaskIdResponse = new BaseResponse("200", "Invalid taskId",null);
+    
+                        res.status(200).send(invalidTaskIdResponse.toObject());
+                    }
+                } else {
+                 
+                    const invalidEmployeeIdResponse = new BaseResponse("200","Invalid employeeId", null);
+
+                    res.status(200).send(invalidEmployeeIdResponse.toObject());
+                }
+            
+            }
+        });
+    } catch (e) {
+        console.log(e);
+
+        const getTaskCatchError = new BaseResponse("500",`Internal server error ${e.message}`, null);
+
+        res.status(500).send(getTaskCatchError.toObject());
     }
 });
 
@@ -142,6 +223,7 @@ router.put("/:empId/tasks", async (req, res) => {
                 if (employee) {
                     employee.set({
                         todo: req.body.todo,
+                        inProgress: req.body.inProgress,
                         done: req.body.done,
                     });
 
@@ -196,6 +278,9 @@ router.delete("/:empId/tasks/:taskId", async (req, res) => {
                     const todoItem = employee.todo.find(
                         (item) => item._id.toString() === req.params.taskId
                     );
+                    const inProgressItem = employee.inProgress.find(
+                        (item) => item._id.toString() === req.params.taskId
+                    );
                     const doneItem = employee.done.find(
                         (item) => item._id.toString() === req.params.taskId
                     );
@@ -220,7 +305,28 @@ router.delete("/:empId/tasks/:taskId", async (req, res) => {
                                 res.status(200).send(deleteTodoItemSuccess.toObject());
                             }
                         });
-                    } else if (doneItem) {
+                    }else if (inProgressItem) {
+                        console.log(inProgressItem);
+    
+                        employee.inProgress.id(inProgressItem._id).remove();
+    
+                        employee.save(function (err, updatedInProgressItemEmployee) {
+                            if (err) {
+                                console.log(err);
+    
+                                const deleteinProgressItemMongodbError = new BaseResponse("500",`Internal server error ${err.message}`,null);
+    
+                                res.status(500).send(deleteinProgressItemMongodbError.toObject());
+                            } else {
+                                console.log(updatedInProgressItemEmployee);
+    
+                                const deleteInProgressItemSuccess = new BaseResponse("200","Query Successful", updatedInProgressItemEmployee);
+    
+                                res.status(200).send(deleteInProgressItemSuccess);
+                            }
+                        });
+                    }
+                     else if (doneItem) {
                         console.log(doneItem);
     
                         employee.done.id(doneItem._id).remove();

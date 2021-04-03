@@ -9,8 +9,18 @@
 */
 .main-welcome {
     margin-top: 30px;
+    padding: 20px;
   }
   
+  .createTask-container button{
+    width: 100%;
+    max-width: 200px;
+    margin: 30px auto;
+    font-size: 20px;
+  }
+  .mat-card-title{
+    text-align: center;
+}
   .title {
     text-align: center;
     font-weight: lighter;
@@ -33,7 +43,8 @@
   }
 
   .task-container{
-    width: 35%;
+    width: 100%;
+    max-width: 1020px;
     margin: 0 auto;
   }
 
