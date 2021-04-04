@@ -32,18 +32,20 @@
 <br />
   <!--Task Columns-->
   <div fxFlex>
-
     <div fxLayout="row" fxLayoutGap="15px" class="task-container">
-
       <!--Todo-->
       <div fxFlex>
+        <!--Start mat card-->
         <mat-card>
           <mat-card-title>To do</mat-card-title>
+          <!--Start of mat card content-->
           <mat-card-content>
+
+            <!--Start of column layout-->
             <div fxLayout="column" fxLayoutGap="10px" class="task-list" cdkDropList #todoList="cdkDropList"
               [cdkDropListData]="todo" [cdkDropListConnectedTo]="[doneList,inProgressList]" (cdkDropListDropped)="drop($event)">
 
-
+            <!--ngFor loop item container-->
               <div *ngFor="let item of todo" cdkDrag>
                 <mat-card class="mat-elevation-z0 task-card">
                   <mat-card-content>
@@ -59,7 +61,7 @@
 
                         <mat-menu #todoOptions="matMenu" x-position="before">
                           <button (click)="deleteTask(item._id)" mat-menu-item>Remove</button>
-                          <!---FIX ME-->
+  
                           <button (click)="openEditTaskDialog(item._id)" mat-menu-item>Edit</button>
                         </mat-menu>
                     
@@ -68,20 +70,28 @@
                   </mat-card-content>
                 </mat-card>
               </div>
+              <!-- End of ngFor loop item container-->
             </div>
+            <!-- End of column layout-->
           </mat-card-content>
+          <!-- end of mat card content-->
         </mat-card>
+        <!--End of mat card-->
       </div>
-      <!-- end of tdo fxFlex -->
+      <!-- end of todo fxFlex -->
 
-<!--In Progress-->
+<!--In Progress container-->
 <div fxFlex>
+<!-- Start mat card-->
   <mat-card>
     <mat-card-title>In Progress</mat-card-title>
+    <!--Start mat content-->
     <mat-card-content>
+          <!--Start of column layout-->
       <div fxLayout="column" fxLayoutGap="10px" class="task-list" cdkDropList #inProgressList="cdkDropList"
         [cdkDropListData]="inProgress" [cdkDropListConnectedTo]="[todoList,doneList]" (cdkDropListDropped)="drop($event)">
 
+        <!--ngFor loop item container-->
         <div *ngFor="let item of inProgress" cdkDrag>
           <mat-card class="mat-elevation-z0 task-card">
             <mat-card-content>
@@ -112,18 +122,23 @@
         </div>
         <!-- End of ngFor for done item-->
       </div>
+          <!--End of column layout-->
     </mat-card-content>
+    <!--End of mat card content-->
   </mat-card>
+  <!--End of mat card-->
 </div>
-
-      <!--Done-->
+<!--End of In Progress container-->
+      <!--Done container-->
       <div fxFlex>
         <mat-card>
           <mat-card-title>Done</mat-card-title>
+          <!--Start mat content-->
           <mat-card-content>
+            <!--Start of column layout-->
             <div fxLayout="column" fxLayoutGap="10px" class="task-list" cdkDropList #doneList="cdkDropList"
               [cdkDropListData]="done" [cdkDropListConnectedTo]="[todoList,inProgressList]" (cdkDropListDropped)="drop($event)">
-
+             <!--ngFor loop item container-->
               <div *ngFor="let item of done" cdkDrag>
                 <mat-card class="mat-elevation-z0 task-card">
                   <mat-card-content>
@@ -155,7 +170,9 @@
               </div>
               <!-- End of ngFor for done item-->
             </div>
+            <!--End of column layout-->
           </mat-card-content>
+          <!--End of mat card content-->  
         </mat-card>
       </div>
       <!-- end of done fxFlex -->

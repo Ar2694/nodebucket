@@ -25,7 +25,7 @@ export class TasksService {
    /**
     * 
     * @param empId 
-    * @returns 
+    * @returns Find all tasks from the API. 
     */
    findAllTasks(empId: string): Observable<any> {
     return this.http.get('/api/employees/' + empId + '/tasks')
@@ -34,7 +34,7 @@ export class TasksService {
    * 
    * @param empId 
    * @param taskId 
-   * @returns 
+   * @returns Find a task from the API.
    */
   findATask(empId: string, taskId: string): Observable<any>{
     return this.http.get(`/api/employees/${empId}/tasks/${taskId}`);
@@ -43,7 +43,7 @@ export class TasksService {
    * 
    * @param empId 
    * @param task 
-   * @returns 
+   * @returns Create and send a task to the API.
    */
   createTask(empId: string, task: string): Observable<any>{
     return this.http.post('/api/employees/' + empId + '/tasks', {
@@ -58,7 +58,7 @@ export class TasksService {
    * @param todo 
    * @param inProgress 
    * @param done 
-   * @returns 
+   * @returns Update task arrays in the API.
    */
   updateTask(empId: string, todo: Item[],inProgress: Item[], done: Item[]): Observable<any>{
     return this.http.put(`/api/employees/${empId}/tasks`, {
@@ -73,7 +73,7 @@ export class TasksService {
    * 
    * @param empId 
    * @param taskId 
-   * @returns 
+   * @returns Delete a task in the API
    */
   deleteTask(empId: string, taskId: string): Observable<any>{
     return this.http.delete(`/api/employees/${empId}/tasks/${taskId}`);

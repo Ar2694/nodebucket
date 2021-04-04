@@ -15,7 +15,7 @@
         <mat-card-subtitle>You must enter a valid numerical employeeId to proceed.</mat-card-subtitle>
         <mat-card-content>
             <mat-card class="mat-elevation-z8" fxLayout="column" fxLayoutGap="10">
-  
+                <!--Start form-->
                 <form [formGroup]="loginForm" (ngSubmit)="login(); loginForm.reset();">
                     <mat-card-content>
                         <mat-form-field fxFlex appearance="fill">
@@ -25,7 +25,7 @@
                                 placeholder="Employee ID" />
                         </mat-form-field>
 
-
+                        <!--start error container-->
                         <mat-error
                             *ngIf="loginForm.controls['empId'].hasError('required') && loginForm.controls['empId'].touched">
                             Employee ID is a required field.
@@ -34,12 +34,14 @@
                             *ngIf="loginForm.controls['empId'].hasError('pattern') && loginForm.controls['empId'].touched">
                             Employee ID must be a numerical value.
                         </mat-error>
+                        <!--End of error container-->
                     </mat-card-content>
                     <mat-card-actions align="end">
                         <button type="submit" fxFlex mat-raised-button [disabled]="!loginForm.valid"
                             color="primary">Submit</button>
                     </mat-card-actions>
                 </form>
+                <!--End of form-->
             </mat-card>
         </mat-card-content>
     </mat-card>

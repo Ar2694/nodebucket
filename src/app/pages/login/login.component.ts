@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
 
     });
   }
-
+/** Login function: Authenticate user and redirect them to home page*/
   login(){
     const empId = this.loginForm.controls['empId'].value;
 

@@ -17,6 +17,10 @@ import { LoginComponent } from './pages/login/login.component';
 import { AuthGuard } from './shared/auth.guard';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 
+
+/**
+ * Configured routes
+ **/
 const routes: Routes = [
   {
     path: '',

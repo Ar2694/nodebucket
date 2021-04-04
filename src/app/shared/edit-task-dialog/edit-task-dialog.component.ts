@@ -11,17 +11,16 @@ import { Item } from 'src/app/shared/item.interface';
 export class EditTaskDialogComponent implements OnInit {
 
   taskForm: FormGroup;
-
   taskItem: Item;
 
-  constructor(private dialogRef: MatDialogRef<EditTaskDialogComponent>,@Inject(MAT_DIALOG_DATA) data, private fb: FormBuilder) {
-      this.taskItem ={
-        _id: data.data._id,
-        text: data.data.text,
-      }
-        
-      
-   }
+  constructor(private dialogRef: MatDialogRef<EditTaskDialogComponent>, @Inject(MAT_DIALOG_DATA) data, private fb: FormBuilder) {
+    this.taskItem = {
+      _id: data.data._id,
+      text: data.data.text,
+    }
+
+
+  }
 
   ngOnInit(): void {
     this.taskForm = this.fb.group({
@@ -30,16 +29,15 @@ export class EditTaskDialogComponent implements OnInit {
 
     console.log(this.taskItem.text);
   }
-
-EditTask(){
-    console.log("test");
+  /**Get new task new and update task list */
+  EditTask() {
     this.taskItem.text = this.taskForm.value.text,
-     
-    console.log( this.taskItem);
+
+      console.log(this.taskItem);
     this.dialogRef.close(this.taskItem);
   }
 
-  cancel(){
+  cancel() {
     this.dialogRef.close();
   }
 }

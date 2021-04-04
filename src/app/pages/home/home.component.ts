@@ -32,6 +32,8 @@ export class HomeComponent implements OnInit {
 
   constructor(private taskService: TasksService, private cookieService: CookieService, private dialog: MatDialog) {
     this.empId = this.cookieService.get('session_user');
+
+    /**Find and populate column tasks. */
     this.taskService.findAllTasks(this.empId).subscribe(res => {
       console.log('--Server response from findAllTasks--');
       console.log(res);
@@ -56,7 +58,9 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+/**
+ * Function: Open a create new task dialog
+ */
   openCreateTaskDialog() {
     const dialogRef = this.dialog.open(CreateTaskDialogComponent, {
       disableClose: true
@@ -76,82 +80,95 @@ export class HomeComponent implements OnInit {
       }
     });
   }
-
+/**
+ * 
+ * @param taskId 
+ * @returns Open Edit task dialog for editing task.
+ */
   openEditTaskDialog(taskId: string) {
-    
-    if(taskId){
-      console.log(`Task item ${taskId} was found!`);
-      this.taskService.findATask(this.empId, taskId).subscribe(res=>{
-      
+    /**Check if taskId is valid */
+    if (taskId) {
+     
+      /***Find data from employee collection by empId and taskId */
+      this.taskService.findATask(this.empId, taskId).subscribe(res => {
         this.employee = res.data;
-        console.log("Check here please");
-        console.log(this.employee);
-       
+   
       }, err => {
         console.log(err);
       }, () => {
         const dialogRef = this.dialog.open(EditTaskDialogComponent, {
           disableClose: true,
-          data:{ data: this.employee}
+          data: { data: this.employee }
         });
 
+        /**dialog function after it's closed */
         dialogRef.afterClosed().subscribe(data => {
-   console.log("after close");
-   console.log(data);
-   const todoIndex = this.todo.findIndex(obj => obj._id === data._id);
-   const inProgressIndex = this.inProgress.findIndex(obj => obj._id === data._id);
-   const doneIndex = this.done.findIndex(obj => obj._id === data._id);
- 
+        
+          /**Find task index with a matching task id */
+          const todoIndex = this.todo.findIndex(item => item._id === data._id);
+          const inProgressIndex = this.inProgress.findIndex(item => item._id === data._id);
+          const doneIndex = this.done.findIndex(item => item._id === data._id);
 
-   if(todoIndex != -1){
-    console.log(this.todo[todoIndex].text);
-    this.todo[todoIndex].text = data.text;
-    this.updateTaskList(this.empId, this.todo,this.inProgress, this.done);
-   }else if(inProgressIndex != -1){
-    console.log(this.inProgress[inProgressIndex].text);
-    this.inProgress[inProgressIndex].text = data.text;
-    this.updateTaskList(this.empId, this.todo,this.inProgress, this.done);
-   }else if(doneIndex != -1){
-    console.log(this.done[doneIndex].text);
-    this.done[doneIndex].text = data.text;
-    this.updateTaskList(this.empId, this.todo,this.inProgress, this.done);
-   }
+          /**Check if todo task is found */
+          if (todoIndex != -1) {
+       
+            this.todo[todoIndex].text = data.text;
+            this.updateTaskList(this.empId, this.todo, this.inProgress, this.done);
+          }
+             /**Check if inprogress task is found */
+          else if (inProgressIndex != -1) {
+           
+            this.inProgress[inProgressIndex].text = data.text;
+            this.updateTaskList(this.empId, this.todo, this.inProgress, this.done);
+          } 
+             /**Check if done task is found */
+          else if (doneIndex != -1) {
+   
+            this.done[doneIndex].text = data.text;
+            this.updateTaskList(this.empId, this.todo, this.inProgress, this.done);
+          }
 
 
         });
-        
+
 
       });
     }
 
-    
-
-   
   }
 
-  drop(event: CdkDragDrop<any[]>){
-    if(event.previousContainer === event.container){
+  /**
+   * Function:  Drag n drop task will update the task list.
+   * @param event 
+   * @returns Drag n drop task will update the task list.
+   */
+  drop(event: CdkDragDrop<any[]>) {
+    if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
       console.log("Reorderd item in an existing column/array");
-      this.updateTaskList(this.empId, this.todo,this.inProgress, this.done);
-    }else{
-      transferArrayItem(event.previousContainer.data, event.container.data,event.previousIndex, event.currentIndex);
+      this.updateTaskList(this.empId, this.todo, this.inProgress, this.done);
+    } else {
+      transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
       console.log("Reorderd task to a diffent column/array");
-   
-      this.updateTaskList(this.empId, this.todo,this.inProgress, this.done);
+
+      this.updateTaskList(this.empId, this.todo, this.inProgress, this.done);
     }
   }
+
+  /**
+   * Function: Find a specific task.
+   * @param taskId 
+   * @returns Find a specific task.
+   */
   findATask(taskId: string): void {
 
-    const currentTask = null;
-
-    if(taskId){
+    if (taskId) {
       console.log(`Task item ${taskId} was found!`);
-      this.taskService.findATask(this.empId, taskId).subscribe(res=>{
-      
+      this.taskService.findATask(this.empId, taskId).subscribe(res => {
+
         this.employee = res.data;
 
-       
+
       }, err => {
         console.log(err);
       }, () => {
@@ -162,11 +179,15 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  
+/**
+ * Function: Delete a specific task.
+ * @param taskId 
+ * @returns  Delete a specific task.
+ */
   deleteTask(taskId: string): void {
-    if(taskId){
+    if (taskId) {
       console.log(`Task item ${taskId} was deleted`);
-      this.taskService.deleteTask(this.empId, taskId).subscribe(res=>{
+      this.taskService.deleteTask(this.empId, taskId).subscribe(res => {
         this.employee = res.data;
       }, err => {
         console.log(err);
@@ -177,14 +198,16 @@ export class HomeComponent implements OnInit {
       });
     }
   }
-  /**
-   * 
-   * @param empId 
-   * @param todo 
-   * @param done 
-   */
-  private updateTaskList(empId: string, todo: Item[], inProgress: Item[], done: Item[]): void{
-    this.taskService.updateTask(empId, todo,inProgress,done).subscribe(res=>{
+
+ /**
+  * Function: Update the task list
+  * @param empId 
+  * @param todo 
+  * @param inProgress 
+  * @param done 
+  */
+  private updateTaskList(empId: string, todo: Item[], inProgress: Item[], done: Item[]): void {
+    this.taskService.updateTask(empId, todo, inProgress, done).subscribe(res => {
       this.employee = res.data;
 
     }, err => {
